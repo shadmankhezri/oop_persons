@@ -3,6 +3,7 @@
 from src.person import Persons
 
 class Students(Persons):
+    
     def __init__(self, pers_id, name, family, gender, year_of_birth , entry_year , student_id):
         super().__init__(pers_id, name, family, gender, year_of_birth)
 

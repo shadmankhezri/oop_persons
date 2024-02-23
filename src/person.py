@@ -1,8 +1,13 @@
+"""
+
+"""
+
+
 
 from datetime import date
 
 class Persons:
-    def __init__(self , pers_id , name , family , gender , year_of_birth , ):
+    def __init__(self , pers_id , name , family , gender , year_of_birth):
         self.pers_id = pers_id
         self.name = name
         self.family = family
@@ -11,8 +16,12 @@ class Persons:
 
 
     def calculate_age(self):
-        current_year = date.today().year
-        return (current_year - self.year_of_birth)
+        try:
+            current_year = date.today().year
+            return (current_year - self.year_of_birth)
+        
+        except Exception as error:
+            print(f"\nError calculating age:{error}\npleas input int for year_of_birth\n")
 
     
 
