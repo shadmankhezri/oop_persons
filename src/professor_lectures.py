@@ -13,8 +13,8 @@ class LectureLimitError(Exception):
 
 
 class ProfessorLecture(Professors):
-    def __init__(self, pers_id, name, family, gender, year_of_birth, prof_id, rank):
-        super().__init__(pers_id, name, family, gender, year_of_birth, prof_id, rank)
+    def __init__(self, pers_id, name, family, gender, year_of_birth, professor_id, rank):
+        super().__init__(pers_id, name, family, gender, year_of_birth, professor_id, rank)
 
         self.lectures = []
 
@@ -24,7 +24,7 @@ class ProfessorLecture(Professors):
         while True:
             try:
                 count_lectures = int(input("Enter the number of lectures: "))
-                if count_lectures < 0 or count_lectures > 5:
+                if (count_lectures < 0 or count_lectures > 5):
                     raise LectureLimitError
                 break
 
@@ -36,11 +36,23 @@ class ProfessorLecture(Professors):
             
 
 
-
-
         for i in range(count_lectures):
             lectures_name = input(f"Enter the name of lecture {i+1}: ")
-            self.lectures.append(lectures_name)
+
+            while True:
+                try:
+                    lectures_unit = int(input(f"please Enter the unit of lecture {lectures_name}: "))
+                    if (lectures_unit < 0 or lectures_unit > 5):
+                        raise LectureLimitError
+                    break
+
+                except ValueError:
+                    print("Invalid input, please do not enter str. enter int")
+
+                except LectureLimitError as error:
+                    print(error)  
+
+            self.lectures.append((lectures_name , lectures_unit))
 
 
 
@@ -51,3 +63,4 @@ class ProfessorLecture(Professors):
 
         print("\nLectures: ")
         print(self.lectures)
+        print(40*"-")

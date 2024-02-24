@@ -14,3 +14,5 @@ class Students(Persons):
     def student_show_info(self):
         self.show_info()
         print(f"Student ID: {self.student_id},\tEntry year: {self.entry_year}")
+        print()
+        print(50*"-")

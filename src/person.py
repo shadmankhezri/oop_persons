@@ -26,5 +26,7 @@ class Persons:
     
 
     def show_info(self):
+        print(50*"-")
+        print("\nInformations:\n")
         print(f"National ID: {self.pers_id},\tName: {self.name},\tFamily: {self.family},\tGender: {self.gender},\tAge: {self.calculate_age()}")
         
