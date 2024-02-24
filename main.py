@@ -17,9 +17,6 @@ class Menu:
             "199022" : Professors("22222" , "shayan" , "khezri" , "male" , 1990 , "199022" , "B"),
             "198533" : Professors("33333" , "ahmad" , "ahmadi" , "male" , 1985 , "198533" , "D"),
             "195044" : Professors("44444" , "akram" , "akrami" , "female" , 1950 , "195044" , "A"),
-            # "199022" : ProfessorLecture("22222" , "shayan" , "khezri" , "male" , 1990 , "199022" , "B"),
-            # "198533" : ProfessorLecture("33333" , "ahmad" , "ahmadi" , "male" , 1985 , "198533" , "D"),
-            # "195044" : ProfessorLecture("44444" , "akram" , "akrami" , "female" , 1950 , "195044" , "A"),
         }
 
         self.professor_lecture = ProfessorLecture()

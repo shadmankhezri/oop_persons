@@ -12,35 +12,26 @@ class LectureLimitError(Exception):
 
 
 class ProfessorLecture:
-    def __init__(self):
-        self.lectures = []
-    
 
-
-    def save_lectures_to_json(self , professor_name , lectures):
+    def read_json(self):
         PATH= "./data/professors_lectures.json"
         try:
         
             with open(PATH , "r") as file:
-                
                 professor_lecture = json.load(file)
                 
         except:
+
             professor_lecture = []    
-            professor_lecture.append({f"{professor_name['name']} {professor_name['family']}" : lectures})
         
         return professor_lecture
 
 
-    def write_json(self , professor_lecture):
+    def write_save_json(self , professor_lecture):
         PATH = "./data/professors_lectures.json"
         with open(PATH , "w") as file:
             json.dump(professor_lecture , file , indent=4)
         
-
-
-
-
 
 
 
@@ -60,14 +51,18 @@ class ProfessorLecture:
             return
             
 
+        self.lectures = []
         for i in range(count_lectures):
             lectures_name = input(f"Enter the name of lecture {i+1}: ")
             lectures_unit = int(input(f"please Enter the unit of lecture {lectures_name}: "))
             self.lectures.append({"name" : lectures_name , "unit" : lectures_unit})
             
 
-        professor_lecture = self.save_lectures_to_json({"name":name , "family":family} , self.lectures)
-        self.write_json(professor_lecture)
+
+        professor_lecture = self.read_json()
+        professor_lecture.append({f"{name} {family}" : self.lectures})
+        self.write_save_json(professor_lecture)
+
 
 
 
