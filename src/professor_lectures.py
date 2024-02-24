@@ -1,7 +1,7 @@
 
 
+import json
 
-from src.professor import Professors
 
 
 
@@ -11,56 +11,65 @@ class LectureLimitError(Exception):
         super().__init__(self.msg)
 
 
-
-class ProfessorLecture(Professors):
-    def __init__(self, pers_id, name, family, gender, year_of_birth, professor_id, rank):
-        super().__init__(pers_id, name, family, gender, year_of_birth, professor_id, rank)
-
+class ProfessorLecture:
+    def __init__(self):
         self.lectures = []
+    
+
+
+    def save_lectures_to_json(self , professor_name , lectures):
+        PATH= "./data/professors_lectures.json"
+        try:
+        
+            with open(PATH , "r") as file:
+                
+                professor_lecture = json.load(file)
+                
+        except:
+            professor_lecture = []    
+            professor_lecture.append({f"{professor_name['name']} {professor_name['family']}" : lectures})
+        
+        return professor_lecture
+
+
+    def write_json(self , professor_lecture):
+        PATH = "./data/professors_lectures.json"
+        with open(PATH , "w") as file:
+            json.dump(professor_lecture , file , indent=4)
+        
 
 
 
-    def write_lectures(self):
-        while True:
-            try:
-                count_lectures = int(input("Enter the number of lectures: "))
-                if (count_lectures < 0 or count_lectures > 5):
-                    raise LectureLimitError
-                break
 
-            except ValueError:
-                print("Invalid input, please do not enter str. enter int")
 
-            except LectureLimitError as error:
-                print(error)
+
+
+    def write_lectures(self , name , family):
+        try:
+
+            count_lectures = int(input("Enter the number of lectures: "))
+            if (count_lectures < 0 or count_lectures > 5):
+
+                raise LectureLimitError
             
-
+        except ValueError:
+            print("Invalid input, please do not enter str. enter int")
+            return
+        except LectureLimitError as error:
+            print(error)
+            return
+            
 
         for i in range(count_lectures):
             lectures_name = input(f"Enter the name of lecture {i+1}: ")
+            lectures_unit = int(input(f"please Enter the unit of lecture {lectures_name}: "))
+            self.lectures.append({"name" : lectures_name , "unit" : lectures_unit})
+            
 
-            while True:
-                try:
-                    lectures_unit = int(input(f"please Enter the unit of lecture {lectures_name}: "))
-                    if (lectures_unit < 0 or lectures_unit > 5):
-                        raise LectureLimitError
-                    break
-
-                except ValueError:
-                    print("Invalid input, please do not enter str. enter int")
-
-                except LectureLimitError as error:
-                    print(error)  
-
-            self.lectures.append((lectures_name , lectures_unit))
+        professor_lecture = self.save_lectures_to_json({"name":name , "family":family} , self.lectures)
+        self.write_json(professor_lecture)
 
 
 
 
-    def show_lecture_info(self):
-        print()
-        self.professor_show_info()
 
-        print("\nLectures: ")
-        print(self.lectures)
-        print(40*"-")
