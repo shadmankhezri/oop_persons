@@ -1,9 +1,9 @@
-
-    
 from src.student import Students
 from src.professor import Professors
 from src.professor_lectures import ProfessorLecture
+from src.lectures_provid import LectuersProvide
 
+#-------------------------------------------------------------------------
 
 class Menu:
     def __init__(self):
@@ -19,25 +19,68 @@ class Menu:
             "195044" : Professors("44444" , "akram" , "akrami" , "female" , 1950 , "195044" , "A"),
         }
 
+
         self.professor_lecture = ProfessorLecture()
+
+        self.lectuers_provid = LectuersProvide(self.professor_lecture)
 
 
     
+    
+#-------------------------------------------------------------------------
 
-    def student_info(self):
+    def student_menu(self):
         try:
             std_id = input("Enter student ID: ")
             std = self.students.get(std_id)
             
             if (std):
-                std.student_show_info()
+                
+                while True:
+                    print("\n---------Student Menu---------\n")
+                    print("\n1. Show Information")
+                    print("2. Lectures provided")
+                    print("3. select Unit")
+                    print("4. Show Unit")
+                    print("5. Back to main menu\n")
+
+                    try:
+                        choice = int(input("Enter your choice: "))
+                        if (choice == 1):
+                            std.student_show_info()
+
+
+
+                        elif (choice == 2):
+                            self.lectuers_provid.show_provide_lecture()
+
+
+
+                        elif (choice == 3):
+                            pass 
+
+
+                        elif (choice == 4):
+                            pass
+
+
+                        elif (choice == 5):
+                            break
+
+                        else:
+                            print("Invalid choic")
+                            
+                    except ValueError:
+                        print("Invalid input, please enter a number")
+
+
 
             else:
                 raise ValueError("Incorrect student ID")
         except ValueError as error:
             print(f"Error: {error}")
 
-
+#-------------------------------------------------------------------------
     def professor_menu(self):
         try:
             prof_id = input("Enter professor ID: ")
@@ -75,6 +118,7 @@ class Menu:
             print(f"Error: {erro}")
 
 
+#-------------------------------------------------------------------------
     
     def main_menu(self):
         while True:
@@ -92,7 +136,7 @@ class Menu:
                 
                 
                 elif (choice == 2):
-                    self.student_info()
+                    self.student_menu()
 
                 elif (choice == 3):
                     print("Exit the program")
@@ -104,6 +148,8 @@ class Menu:
             except ValueError as error:
                 print("Error: {error}")
 
+#-------------------------------------------------------------------------
+                
 if __name__ == "__main__":
     menu = Menu()
     menu.main_menu()
