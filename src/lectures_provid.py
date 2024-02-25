@@ -1,5 +1,5 @@
-# from src.professor_lectures import wr
-# import json
+# from src.professor_lectures import read_json
+import json
 
 
 class LectuersProvide:
@@ -7,32 +7,36 @@ class LectuersProvide:
         self.professor_lecture = professor_lecture
 
 
+
+
+
+    def read_json(self):
+
+        lecture_data = []
+        PATH = "./data/professors_lectures.json"
+    
+        with open(PATH , 'r') as file:
+            lecture_data = json.load(file)
+        
+        return lecture_data
+
+
+
+
     def show_provide_lecture(self):
-        lectures = self.professor_lecture.lectures
+        lecture_data = self.read_json()
 
-        if (lectures):
-            print("list of provided lectures:")
-            for lecture in lectures:
-                print(f"Lecture: {lecture['name']} , Unit: {lecture['unit']}")
+        if (lecture_data):
+            print("provided lectures:")
 
+            for professor_data in lecture_data:
+
+                for professor , lectures in professor_data.items():
+                    print(f"\nProfessor: {professor}")
+
+                    for lecture in lectures:
+                        print(f"Lectures: {lecture['name']}, Unit: {lecture['unit']}")
+                    
+                    
         else:
             print("No lectures provided")
-
-
-        # PATH = "./data/professors_lectures.json"
-        # try:
-        #     with open(PATH , 'r') as file:
-        #         lectures_data = json.load(file)
-        #         if (lectures_data):
-
-        #             print("Provided Lectures")
-        #             for professor , lectures in lectures_data.item():
-        #                 print(f"\nProfessor: {professor}")
-        #                 for lecture in lectures:
-        #                     print(f"Lectures: {lecture['name']}, Unit: {lecture['unit']}")
-
-        #         else:
-        #             print("No lectures provided")
-        
-        # except:
-        #     print("file not found.")

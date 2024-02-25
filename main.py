@@ -2,6 +2,8 @@ from src.student import Students
 from src.professor import Professors
 from src.professor_lectures import ProfessorLecture
 from src.lectures_provid import LectuersProvide
+from src.select_lectures import StudentSelectLectures
+from src.show_unit import show_unit_list
 
 #-------------------------------------------------------------------------
 
@@ -24,6 +26,7 @@ class Menu:
 
         self.lectuers_provid = LectuersProvide(self.professor_lecture)
 
+        self.student_select_lectures = StudentSelectLectures()
 
     
     
@@ -57,11 +60,19 @@ class Menu:
 
 
                         elif (choice == 3):
-                            pass 
+                            self.student_select_lectures.select_unit()
 
 
                         elif (choice == 4):
-                            pass
+
+                            self.student_select_lectures.load_selection()
+                            selected_lectures = self.student_select_lectures.get_lectures_list()
+
+                            if (selected_lectures):
+                                show_unit_list(selected_lectures)
+
+                            else:
+                                print("No Lectures Selected.")
 
 
                         elif (choice == 5):
