@@ -1,4 +1,3 @@
-# from src.professor_lectures import read_json
 import json
 
 
@@ -37,6 +36,6 @@ class LectuersProvide:
                     for lecture in lectures:
                         print(f"Lectures: {lecture['name']}, Unit: {lecture['unit']}")
                     
-                    
+
         else:
             print("No lectures provided")
