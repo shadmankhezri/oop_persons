@@ -1,4 +1,9 @@
-
+"""
+Here, like the Professors class, we have created a class for the Students, which inherits from the Persons class,
+and the init function contains the attributes for the student, and then we have created a function 
+to show the student information, student_show_info(), and inside this function, 
+the person class show function is also called, show_info()
+"""
 
 from src.person import Persons
 
